@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -19,6 +20,12 @@ public class Practice13GetTextBoundsView extends View {
     String text6 = "â";
     int top = 200;
     int bottom = 400;
+    int yf1 = 0;
+    int yf2 = 0;
+    int yf3 = 0;
+    int yf4 = 0;
+    int yf5 = 0;
+    int yf6 = 0;
 
     public Practice13GetTextBoundsView(Context context) {
         super(context);
@@ -37,6 +44,21 @@ public class Practice13GetTextBoundsView extends View {
         paint1.setStrokeWidth(20);
         paint1.setColor(Color.parseColor("#E91E63"));
         paint2.setTextSize(160);
+
+        Rect textBounds = new Rect();
+        paint2.getTextBounds(text1, 0, text1.length(), textBounds);
+        yf1 = -(textBounds.bottom + textBounds.top) / 2;//半字高度
+        paint2.getTextBounds(text2, 0, text2.length(), textBounds);
+        yf2 = -(textBounds.bottom + textBounds.top) / 2;
+        paint2.getTextBounds(text3, 0, text3.length(), textBounds);
+        yf3 = -(textBounds.bottom + textBounds.top) / 2;
+        paint2.getTextBounds(text4, 0, text4.length(), textBounds);
+        yf4 = -(textBounds.bottom + textBounds.top) / 2;
+        paint2.getTextBounds(text5, 0, text5.length(), textBounds);
+        yf5 = -(textBounds.bottom + textBounds.top) / 2;
+        paint2.getTextBounds(text6, 0, text6.length(), textBounds);
+        yf6 = -(textBounds.bottom + textBounds.top) / 2;
+
     }
 
     @Override
@@ -50,11 +72,11 @@ public class Practice13GetTextBoundsView extends View {
         // 这种居中算法的优点是，可以让文字精准地居中，分毫不差
 
         int middle = (top + bottom) / 2;
-        canvas.drawText(text1, 100, middle, paint2);
-        canvas.drawText(text2, 200, middle, paint2);
-        canvas.drawText(text3, 300, middle, paint2);
-        canvas.drawText(text4, 400, middle, paint2);
-        canvas.drawText(text5, 500, middle, paint2);
-        canvas.drawText(text6, 600, middle, paint2);
+        canvas.drawText(text1, 100, middle + yf1, paint2);
+        canvas.drawText(text2, 200, middle + yf2, paint2);
+        canvas.drawText(text3, 300, middle + yf3, paint2);
+        canvas.drawText(text4, 400, middle + yf4, paint2);
+        canvas.drawText(text5, 500, middle + yf5, paint2);
+        canvas.drawText(text6, 600, middle + yf6, paint2);
     }
 }
